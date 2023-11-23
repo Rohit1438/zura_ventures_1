@@ -24,7 +24,7 @@ const SignUp = () => {
 
 
   const handelSignin = async () => {
-    console.log();
+    // console.log();
     try {
       setLoader(true)
       let res = await axios.post(`${BASE_URL}/user/signup`, {

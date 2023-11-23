@@ -33,7 +33,8 @@ import {
 } from "@chakra-ui/react";
 
 import { useDisclosure } from "@chakra-ui/react";
-const BASE_URL = "http://localhost:8080/api/v1";
+import { AuthContext } from "../Context/AuthContextProvider";
+const BASE_URL="https://zuraventures1.onrender.com/api/v1"
 const defaultLinkStyle = {
   textDecoration: "none",
   color: "#49454F",
@@ -76,12 +77,12 @@ const SinglePodcast = () => {
       label: "Edit trasncription",
     },
     {
-      to: `/projects/${id}`,
+      to: `/platform/${id}`,
       label: "Choose Platform",
     },
 
     {
-      to: `/projects/${id}`,
+      to: `/active/${id}`,
       label: "Active",
     },
   ];
@@ -100,7 +101,8 @@ const SinglePodcast = () => {
 
   const cancelRef = React.useRef();
   const [projectName, setProjectName] = useState("");
-
+  const {user,setUser}= useContext(AuthContext)
+  // console.log(user,"user")
   const handleCreate = () => {
     console.log("Project Name:", projectName);
     onClose();
@@ -112,13 +114,13 @@ const SinglePodcast = () => {
       let res = await axios.get(`${BASE_URL}/projects/episodes/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
- console.log(res)
+ console.log(res,"this is the thing")
       
  res = await res.data;
- console.log(res.projectName)
+//  console.log(res.projectName)
 await setProjectName((pre)=>(res.projectName))
       if(res.message!=="Episodes not found for the project"){
-        setEpisodes((pre) => [...res.episodes]);
+        await setEpisodes((pre) => [...res.episodes]);
       }
       // console.log(res);
       
@@ -129,7 +131,7 @@ await setProjectName((pre)=>(res.projectName))
   useEffect(() => {
     fetchEpisodes();
   }, []);
-console.log(project)
+
 
 
 
@@ -155,13 +157,26 @@ console.log(project)
       let res = await axios.delete(`${BASE_URL}/projects/deleteEpisode/${episodeId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      await fetchEpisodes()
-      console.log(res);
-   
+
+      if(res.data.message=="Episode deleted successfully"){
+        await fetchEpisodes()
+      }
+  
+      let updatedEpisodes=await episodes.filter((el)=>{
+        console.log(el)
+        return (el._id!==episodeId)})
+      // await  setEpisodes((pre)=>updateEpisodes)
+      console.log(updatedEpisodes,"updated")
+      console.log(res,"deleteres");
+      console.log(episodes,"after delete");
     } catch (error) {
       console.log(error);
     }
   };
+console.log(episodes.length)
+
+
+
 
   const updateEpisodes = async (episodeId) => {
     try {
@@ -230,7 +245,8 @@ console.log(project)
           </div>
         </div>
         <div style={{borderTop:"1px solid grey",padding:"15px 10px 10px 15px",fontSize:"20px"}}>
-          <p> <i class="fa-solid fa-gear"></i> settings</p>
+          <Link to={`/projects/settings/:${id}`}><p> <i class="fa-solid fa-gear"></i> settings</p></Link>
+          
         </div>
       </div>
       <div className="rightBox">

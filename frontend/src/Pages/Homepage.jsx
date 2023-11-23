@@ -11,7 +11,7 @@ const Homepage = () => {
     const [open, setOpen] = React.useState(false);
 
 const [projectName,setProjectName]=useState("")
-const BASE_URL="http://localhost:8080/api/v1"
+const BASE_URL="https://zuraventures1.onrender.com/api/v1"
 const token = localStorage.getItem("lamatoken") || "";
 // const createProject=async()=>{
 // try{

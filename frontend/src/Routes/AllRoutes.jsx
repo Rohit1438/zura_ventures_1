@@ -8,6 +8,7 @@ import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import { PrivateRoute } from "./PrivateRoute";
 import { DataContext } from "../Context/DataContextProvider";
+import AccountPage from "../Pages/AccountPage";
 
 
 export const AllRoutes = () => {
@@ -35,13 +36,14 @@ export const AllRoutes = () => {
       </PrivateRoute>
  
     
-   
-      
+
+
   
       
       
       } />
-      <Route path="/:id" element={<SinglePodcast />} />
+      <Route path="projects/:id" element={<SinglePodcast />} />
+      <Route path="/projects/settings/:id" element={<AccountPage/>} />
       <Route path="*" element={<SinglePodcast />} />
       {/* <Route
         path="/admin"

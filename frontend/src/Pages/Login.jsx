@@ -14,11 +14,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const { user,setUser } = useContext(AuthContext);
-
+  console.log(user,"userlogin")
   const toast = useToast();
   const handleLogin = async () => {
-    console.log(email,password);
-    console.log(process.env);
 
     try {
       setLoader(true);
@@ -27,13 +25,16 @@ const Login = () => {
         email: email,
         password: password,
       });
-      console.log(res);
+  
       res = res.data;
-      console.log(res, "ress");
+
       if (res.token) {
+        console.log(res, "suer");
+        await setUser((pre)=>res)
         setLoader(false);
         console.log(res.token);
         localStorage.setItem("lamatoken", res.token);
+        localStorage.setItem("lamauser", JSON.stringify(res));
         toast({
           title: "Saved",
           description: "Login Succesfull",
