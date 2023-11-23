@@ -62,11 +62,11 @@ const Navbar = () => {
   return (
     <div
       style={{
-        zIndex: 10,
+      
         position: "sticky",
         width: "100%",
         top: "0px",
-  
+        zIndex: 10,
         
       
       }}
@@ -81,7 +81,7 @@ const Navbar = () => {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={10} padding={"20px opx 20px"}  alignItems={"center"}>
-            <Link to={"/"}>
+            <Link to={"/projects"}>
            
 
             <Box w="180px" h="70px" ml={10} padding="5px" style={{color:"#7E22CE",display:"flex",alignItems:"center"}}>

@@ -1,14 +1,48 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "../Pages/Homepage";
+import Projects from "../Pages/Projects";
+import SinglePodcast from "../Pages/SinglePodcast";
+import Login from "../Pages/Login";
 
-
+import SignUp from "../Pages/SignUp";
+import { PrivateRoute } from "./PrivateRoute";
+import { DataContext } from "../Context/DataContextProvider";
 
 
 export const AllRoutes = () => {
+  const {allProjects,setAllProjects,project,setProject,episodes,setEpisodes}=useContext(DataContext)
   return (
     <Routes>
-      <Route path="/" element={<Homepage />} />
+      <Route path="/" element={
+      <PrivateRoute>
+
+       <Homepage />    
+
+
+
+       
+      </PrivateRoute>
+   
+      
+      } />
+       <Route path="/login" element={<Login/>} />
+       <Route path="/signup" element={<SignUp />} />
+      <Route path="/projects" element={
+      <PrivateRoute>
+
+    {  (allProjects.length==0)?<Homepage/>:  <Projects />  }   
+      </PrivateRoute>
+ 
+    
+   
+      
+  
+      
+      
+      } />
+      <Route path="/:id" element={<SinglePodcast />} />
+      <Route path="*" element={<SinglePodcast />} />
       {/* <Route
         path="/admin"
         element={

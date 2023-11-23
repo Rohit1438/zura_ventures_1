@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+
 import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContextProvider";
 
@@ -8,11 +8,11 @@ export const PrivateRoute = ({ children }) => {
 
 
 
-  const token = localStorage.getItem("buycartoken") || "";
+  const token = localStorage.getItem("lamatoken") || "";
   //     const authentication=()=>{
   //         if(token){
   //            setIsAuth(true)
-  //         }
+  //         }  
   //     }
 
   // useEffect(()=>{
