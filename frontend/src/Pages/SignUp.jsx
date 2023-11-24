@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { CircularProgress, useToast } from "@chakra-ui/react";
-const BASE_URL="http://localhost:8080/api/v1"
+const BASE_URL="https://zuraventures1.onrender.com/api/v1"
 const SignUp = () => {
   // const location = useLocation();
 
@@ -75,7 +75,7 @@ const SignUp = () => {
     <Div>
       <DIV>
         <h1>Sign In</h1>
-        <h2>🤩Welcome to Buy Car🚘 🤩</h2>
+        <h2>🤩Welcome to LAMA 🤩</h2>
         <input
           type="text"
           placeholder="Username"

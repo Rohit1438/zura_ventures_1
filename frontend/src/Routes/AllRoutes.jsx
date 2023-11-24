@@ -29,19 +29,18 @@ export const AllRoutes = () => {
       } />
        <Route path="/login" element={<Login/>} />
        <Route path="/signup" element={<SignUp />} />
-      <Route path="/projects" element={
+     
+      {/* <Route path="/projects" element={
       <PrivateRoute>
-
     {  (allProjects.length==0)?<Homepage/>:  <Projects />  }   
       </PrivateRoute>
- 
-    
-
-
-  
-      
-      
+      } /> */}
+      <Route path="/projects" element={
+      <PrivateRoute>
+     <Projects />  
+      </PrivateRoute>
       } />
+
       <Route path="projects/:id" element={<SinglePodcast />} />
       <Route path="/projects/settings/:id" element={<AccountPage/>} />
       <Route path="*" element={<SinglePodcast />} />

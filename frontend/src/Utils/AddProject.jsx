@@ -14,6 +14,7 @@ import {
     Input,
     FormHelperText,
   } from '@chakra-ui/react'
+  import {useNavigate} from "react-router-dom"
 import React, { useContext, useState } from "react"
   import { Button, ButtonGroup } from '@chakra-ui/react'
   import { useDisclosure } from '@chakra-ui/react';
@@ -26,18 +27,42 @@ export default function AlertDialogExample() {
     const [user,setUser]=useState({})
     const cancelRef = React.useRef()
   const [projectName, setProjectName] = useState('');
-
+const navigate=useNavigate()
   const BASE_URL="http://localhost:8080/api/v1"
   const token = localStorage.getItem("lamatoken") || "";
+
+  const fetchProjects = async (token) => {
+    try {
+      console.log("fetching")
+      let res = await axios.get(`${BASE_URL}/projects`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log(res)
+      res=await res.data.projects
+  
+      await  setAllProjects((pre)=>[...res])
+
+    } catch (error) {
+      console.log(error);
+  
+    }
+  };
+
   const createProject=async()=>{
   try{
-  let res=axios.post(`${BASE_URL}/projects/addprojects`,
+  let res=  await axios.post(`${BASE_URL}/projects/addprojects`,
   { title: projectName},
   { headers: { authorization: `Bearer ${token}` } }
   
   )
+  res=await res.data
+
+  console.log(res)
+  // await  setAllProjects((pre)=>[...res.projects])
+
   fetchProjects(token)
   onClose();
+  navigate("/projects");
   }catch(err){
       console.log(err);
   }
@@ -47,22 +72,7 @@ export default function AlertDialogExample() {
     console.log('Project Name:', projectName);
     onClose();
   };
-  const fetchProjects = async (token) => {
-    try {
-      console.log("fetching")
-      let res = await axios.get(`${BASE_URL}/projects`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      
-      res=await res.data.projects
-  
-      await  setAllProjects((pre)=>[...res])
-      setUser(res.data.user);
-    } catch (error) {
-      console.log(error);
-  
-    }
-  };
+
 
   return (
     <>

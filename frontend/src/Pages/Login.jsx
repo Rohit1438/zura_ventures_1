@@ -6,12 +6,12 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CircularProgress, useToast } from "@chakra-ui/react";
 import { AuthContext } from "../Context/AuthContextProvider";
-const BASE_URL="http://localhost:8080/api/v1"
+const BASE_URL="https://zuraventures1.onrender.com/api/v1"
 const Login = () => {
     const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("test12@gmail.com");
+  const [password, setPassword] = useState("1111");
 
   const { user,setUser } = useContext(AuthContext);
   console.log(user,"userlogin")
@@ -98,15 +98,17 @@ const Login = () => {
     <Div>
       <DIV>
         <h1>Log in now !!</h1>
-        <h2>your inventory is waiting for you 🥳🥳</h2>
+        <h2>your Projects are waiting for you 🥳🥳</h2>
         <input
           type="email"
           placeholder="Email"
+        value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
+value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <button data-testid="user-login" onClick={handleLogin}>

@@ -19,8 +19,8 @@ const Projects = () => {
     <Navbar/>
     
   
-{allProjects.length!==0?<Div>
-    <div className='homeroute'>
+<Div>
+    <div className='homeroute' >
 <Link to={"/"} style={{color:"black",padding:"5px 20px",boxShadow: "0px 0px 0px 0px rgba(0, 0, 0, 0.06), 0.75032px 1.50064px 3.75159px 0px rgba(0, 0, 0, 0.06), 3.00127px 6.00254px 6.75286px 0px rgba(0, 0, 0, 0.05), 6.75286px 13.50572px 9.00381px 0px rgba(0, 0, 0, 0.03), 12.00508px 24.01017px 10.50445px 0px rgba(0, 0, 0, 0.01), 18.75794px 36.76557px 12.00508px 0px rgba(0, 0, 0, 0.00)",display:"flex",
 alignItems:"center",justifyContent:"space-between",
 borderRadius:"25px",marginBottom:"8px"}}>
@@ -36,7 +36,9 @@ Back to Home</Link>
        </div>
 
     </div>
-    <div className='projectcards'>
+
+    {allProjects.length!==0?
+    <div className='projectcards' >
 {allProjects?.map((el,index)=>{
  let res = el.title.split(" ");
 
@@ -72,11 +74,16 @@ Back to Home</Link>
     )
 })}
     </div>
-</Div>:
-<div>
-  <p>No projects found</p>
+
+    :
+    <div>
+  <p>oops 😥... it seems like there's nothing..</p>
+  
 </div>
 }
+</Div>:
+
+
 </>
   )
 }

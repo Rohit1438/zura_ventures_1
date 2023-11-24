@@ -102,9 +102,9 @@ const SinglePodcast = () => {
   const cancelRef = React.useRef();
   const [projectName, setProjectName] = useState("");
   const {user,setUser}= useContext(AuthContext)
-  // console.log(user,"user")
+
   const handleCreate = () => {
-    console.log("Project Name:", projectName);
+    
     onClose();
   };
 
@@ -117,12 +117,12 @@ const SinglePodcast = () => {
  console.log(res,"this is the thing")
       
  res = await res.data;
-//  console.log(res.projectName)
+
 await setProjectName((pre)=>(res.projectName))
       if(res.message!=="Episodes not found for the project"){
         await setEpisodes((pre) => [...res.episodes]);
       }
-      // console.log(res);
+
       
     } catch (error) {
       console.log(error);
@@ -157,8 +157,10 @@ await setProjectName((pre)=>(res.projectName))
       let res = await axios.delete(`${BASE_URL}/projects/deleteEpisode/${episodeId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log(res,"deletresult")
 
       if(res.data.message=="Episode deleted successfully"){
+        console.log("fetching after deleting")
         await fetchEpisodes()
       }
   
@@ -166,14 +168,14 @@ await setProjectName((pre)=>(res.projectName))
         console.log(el)
         return (el._id!==episodeId)})
       // await  setEpisodes((pre)=>updateEpisodes)
-      console.log(updatedEpisodes,"updated")
-      console.log(res,"deleteres");
-      console.log(episodes,"after delete");
+      // console.log(updatedEpisodes,"updated")
+      // console.log(res,"deleteres");
+      
     } catch (error) {
       console.log(error);
     }
   };
-console.log(episodes.length)
+console.log(episodes,"episdoes data and length",episodes.length)
 
 
 
@@ -186,7 +188,7 @@ console.log(episodes.length)
       );
       await fetchEpisodes()
       setIsEditClicked((pre)=>false)
-      console.log(res);
+
       return res;
     } catch (error) {
       console.log(error);
@@ -544,7 +546,7 @@ Save & Exit
                   {episodes?.map((el) => (
                     <tr key={el._id}>
                       <td>{el.title}</td>
-                      <td>{el.lastUpdated}</td>
+                      <td>{new Date(el.lastUpdated).toLocaleString()}</td>
                       <td>Done</td>
                       <td>
                         <ButtonGroup size="sm" isAttached variant="outline">

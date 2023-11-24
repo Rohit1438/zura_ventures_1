@@ -46,7 +46,7 @@ const fetchProjects = async (token) => {
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    if(res.data.message!=="Projects not found"){
+    if(res?.data?.message!=="Projects not found"){
       // console.log("coming")
       res=await res.data.projects
       if(res.length!==0){

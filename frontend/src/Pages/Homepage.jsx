@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from "styled-components"
 import image from "../Images/homepage1.png"
 import { Link } from 'react-router-dom'
 import AlertDialogExample from '../Utils/AddProject'
 import axios  from 'axios'
 import Navbar from '../Components/Navbar'
+import { DataContext } from '../Context/DataContextProvider'
 
 
 const Homepage = () => {
     const [open, setOpen] = React.useState(false);
-
+    const {allProjects,setAllProjects,project,setProject,episodes,setEpisodes}=useContext(DataContext)
 const [projectName,setProjectName]=useState("")
 const BASE_URL="https://zuraventures1.onrender.com/api/v1"
 const token = localStorage.getItem("lamatoken") || "";
@@ -23,7 +24,7 @@ const token = localStorage.getItem("lamatoken") || "";
 // }
 // }
 
-
+console.log(allProjects);
   return (
     <>
         <Navbar/>
